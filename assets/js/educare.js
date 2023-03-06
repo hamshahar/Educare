@@ -7,17 +7,17 @@
  *
  */
 
-function checkroll_no() {
-    var Roll_No = document.getElementById("Roll_No").value;
-    var label = document.getElementById("roll_no");
+function checkDate_Of_Birth() {
+    var Date_Of_Birth = document.getElementById("Date_Of_Birth").value;
+    var label = document.getElementById("Date_Of_Birth");
     
-  if(Roll_No.length < 6 && Roll_No.length > 0)
+  if(Date_Of_Birth.length < 6 && Date_Of_Birth.length > 0)
     {
         label.innerHTML = "Number should be at least 6 digit long"
         return false;
     }
     
-    else if(Roll_No.length > 6 && Roll_No.length > 0)
+    else if(Date_Of_Birth.length > 6 && Date_Of_Birth.length > 0)
     {
         label.innerHTML = "Number should be over! 6 digit long"
         return false;
@@ -26,9 +26,9 @@ function checkroll_no() {
     else
     {
         var flag = true;
-        for(var i = 0; i < Roll_No.length; i++)
+        for(var i = 0; i < Date_Of_Birth.length; i++)
         {
-            var code = Roll_No.charCodeAt(i);
+            var code = Date_Of_Birth.charCodeAt(i);
 
             if (!(code > 47 && code < 58)) // numeric (0-9)
             {
@@ -98,7 +98,7 @@ function checkEmpty() {
         }
     }
 
-    var finalFlag = flag && checkreg_no() && checkroll_no();
+    var finalFlag = flag && checkreg_no() && checkDate_Of_Birth();
     return finalFlag;
 
 }
@@ -133,7 +133,7 @@ function checkEmptyfield() {
         }
     }
 
-    var finalFlag = flag && checkreg_no() && checkroll_no();
+    var finalFlag = flag && checkreg_no() && checkDate_Of_Birth();
     return finalFlag;
 
 }
@@ -164,9 +164,9 @@ function resetError() {
     Reg_No.oninput = checkreg_no;
     Reg_No.onfocus = resetError;
 
-    var Roll_No = document.getElementById("Roll_No");
-    Roll_No.oninput = checkroll_no;
-    Roll_No.onfocus = resetError;
+    var Date_Of_Birth = document.getElementById("Date_Of_Birth");
+    Date_Of_Birth.oninput = checkDate_Of_Birth;
+    Date_Of_Birth.onfocus = resetError;
 
 })();
 //end Validation

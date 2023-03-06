@@ -349,7 +349,7 @@ Attention please: You only need to give us 5 stars!
 * Added more options in settings
 * Admin can hide student details from result card
 * Admin can hide grade sheet from result card
-* Fixed front-end roll no and regi no short fields
+* Fixed front-end date of birth and regi no short fields
 
 = [1.2.*] =
 

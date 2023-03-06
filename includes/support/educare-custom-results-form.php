@@ -17,7 +17,7 @@
  * 1. <select name="Class">
  * 2. <select name="Exam">
  * 3. <select name="Year">
- * 4. <input name="Roll_No">
+ * 4. <input name="Date_Of_Birth">
  * 5. <input name="Regi_No">
  * 6. <button name="educare_results">
  *
@@ -39,15 +39,15 @@ function educare_my_custom_results_forms() {
 			$$key = sanitize_text_field( $value );
 		}
  	} else {
-		$Roll_No = $Regi_No = $Class = $Exam = $Year = '';
+		$Date_Of_Birth = $Regi_No = $Class = $Exam = $Year = '';
 	}
 	
 	?>
 
 	<form class="add_results" action="" method="post" id="edit">
 
-		<p>Roll No:</p>
-		<input type="number" name="Roll_No" value="<?php echo esc_attr( $Roll_No )?>" placeholder="Inter Roll No">
+		<p>Date Of Birth:</p>
+		<input type="number" name="Date_Of_Birth" value="<?php echo esc_attr( $Date_Of_Birth )?>" placeholder="Enter Date_Of_Birth">
 
 		<p>Regi No:</p>
 		<input type="number" name="Regi_No" value="<?php echo esc_attr( $Regi_No )?>" placeholder="Inter Regi No">

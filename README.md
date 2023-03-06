@@ -182,7 +182,7 @@ Using this features admin (teacher) can add subject wise multiple student result
 
 > **Admin menu > Educare > All Results > Add Results**
 
-Notes: Please carefully fill out all the details of the form. If you miss one, you may have problems to see the result. So, verify the student's admission form well and then give all details here. All (Class, Exam, Roll No, Regi No, Year) fields are required.
+Notes: Please carefully fill out all the details of the form. If you miss one, you may have problems to see the result. So, verify the student's admission form well and then give all details here. All (Class, Exam, Date Of Birth, Regi No, Year) fields are required.
 
 ## 4. View Results
 
@@ -200,7 +200,7 @@ Here admin can update/edit/delete the students results that was previously added
 
 > **Admin menu > Educare > All Results > Import Results**
 
-Please carefully fill out all the details of your import (.csv) files. If you miss one, you may have problems to import the results. So, verify the student's admission form well and then give all the details in your import files. Required field are: Name, Roll No, Regi No, Exam, Class and Year. So, don't miss all of this required field!
+Please carefully fill out all the details of your import (.csv) files. If you miss one, you may have problems to import the results. So, verify the student's admission form well and then give all the details in your import files. Required field are: Name, Date Of Birth, Regi No, Exam, Class and Year. So, don't miss all of this required field!
 
 If you don't know, how to create import files. Please [download](https://github.com/FixBD/Educare/wiki/How-To-Import-Results) demo files for better understanding.
 

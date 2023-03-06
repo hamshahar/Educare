@@ -419,7 +419,7 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 		
 		foreach ( $results as $print ) {
 			$results = $print->data;
-			// $subject = ["Class", "Regi_No", "Roll_No", "Exam", "Name"];
+			// $subject = ["Class", "Regi_No", "Date_Of_Birth", "Exam", "Name"];
 
 			if ($list == 'Class' or $list == 'Group') {
 				$results = json_decode($results, true);
@@ -1101,7 +1101,7 @@ function educare_files_selector($type, $print) {
 /**
  * sample array
 $array = array(
-  'Roll_No' => 1,
+  'Date_Of_Birth' => 1,
   'Regi_No' => 2,
   'Year' => 2022,
   'Class' => 'Class 6',
@@ -1386,7 +1386,7 @@ function educare_crud_data($add_students = null, $import_data = null) {
     // create and show msgs
     if ($msgs == 'added' or $msgs == 'updated') {
       echo "<div class='notice notice-success is-dismissible'><p>";
-        echo "Successfully ".esc_html($msgs)." ".esc_html($msg)."." . wp_kses_post($name . $class . $roll_no . $regi_no) . $forms;
+        echo "Successfully ".esc_html($msgs)." ".esc_html($msg)."." . wp_kses_post($name . $class . $Date_Of_Birth . $regi_no) . $forms;
       echo "</p></div>";
     }
     
@@ -1570,7 +1570,7 @@ function educare_crud_data($add_students = null, $import_data = null) {
  * 
  * Usage example: educare_get_results_forms($print, 'add/update')
  * 
- * it's only print forms field (Name, Class, Exam, Roll No, Regi No, Year...)
+ * it's only print forms field (Name, Class, Exam, Date Of Birth, Regi No, Year...)
  * required educare_crud_data() function for work properly
  * Actually, this function only for print forms under educare_crud_data();
  * 
@@ -1646,10 +1646,10 @@ function educare_get_results_forms($print, $add_students = null) {
 						';
 					}
 
-					if (key_exists('Roll_No', $requred_fields)) {
-						echo '<p>'.esc_html($requred_title['Roll_No']).':</p>
-						<label for="Roll_No" class="labels" id="roll_no"></label>
-						<input type="number" name="Roll_No" value="'.esc_attr($Roll_No).'" placeholder="Inter '.esc_html($requred_title['Roll_No']).'">
+					if (key_exists('Date_Of_Birth', $requred_fields)) {
+						echo '<p>'.esc_html($requred_title['Date_Of_Birth']).':</p>
+						<label for="Date_Of_Birth" class="labels" id="Date_Of_Birth"></label>
+						<input type="number" name="Date_Of_Birth" value="'.esc_attr($Date_Of_Birth).'" placeholder="Inter '.esc_html($requred_title['Date_Of_Birth']).'">
 						';
 					}
 
@@ -1690,7 +1690,7 @@ function educare_get_results_forms($print, $add_students = null) {
 				}
 
 				if (!$add_students) {
-					echo '<div id="data_from_students" title="Get data/details from specific student profiles. For this, you need to fill roll no, regi no, class and year."><div class="educare_button">Auto Fill</div></div>';
+					echo '<div id="data_from_students" title="Get data/details from specific student profiles. For this, you need to fill date of birth, regi no, class and year."><div class="educare_button">Auto Fill</div></div>';
 				}
 				
 				?>
@@ -1758,7 +1758,7 @@ function educare_get_results_forms($print, $add_students = null) {
 				<br>
 				<?php
 				// if ($submit != 'Add') { 
-				// 	echo educare_guide_for('If you want to update old class data ('.esc_html($requred_title['Name']).', '.esc_html($requred_title['Roll_No']).', '.esc_html($requred_title['Regi_No']).', Details) please check it otherwise uncheck.');
+				// 	echo educare_guide_for('If you want to update old class data ('.esc_html($requred_title['Name']).', '.esc_html($requred_title['Date_Of_Birth']).', '.esc_html($requred_title['Regi_No']).', Details) please check it otherwise uncheck.');
 
 				// 	echo '<input type="checkbox" name="update_old_data" checked> Update old data <br>';
 				// }
@@ -1798,13 +1798,13 @@ function educare_get_results_forms($print, $add_students = null) {
 function educare_get_data_from_students() {
 	wp_parse_str($_POST['form_data'], $_POST);
 
-	$roll = sanitize_text_field($_POST['Roll_No']);
+	$roll = sanitize_text_field($_POST['Date_Of_Birth']);
 	$regi = sanitize_text_field($_POST['Regi_No']);
 	$class = sanitize_text_field($_POST['Class']);
 	$year = sanitize_text_field($_POST['Year']);
 
 	$_POST = array (
-		'Roll_No' => $roll,
+		'Date_Of_Birth' => $roll,
 		'Regi_No' => $regi,
 		'Class' => $class,
 		'Year' => $year,
@@ -1880,10 +1880,10 @@ function educare_get_search_forms($front = null) {
 						}
 					echo '</div>';
 
-					if (key_exists('Roll_No', $requred_fields)) {
-						echo '<p>'.esc_html($roll_no).':</p>
-						<label for="Roll_No" class="labels" id="roll_no"></label>
-						<input type="number" name="Roll_No" value="'.esc_attr($Roll_No).'" placeholder="Inter '.esc_attr($roll_no).'">
+					if (key_exists('Date_Of_Birth', $requred_fields)) {
+						echo '<p>'.esc_html($Date_Of_Birth).':</p>
+						<label for="Date_Of_Birth" class="labels" id="Date_Of_Birth"></label>
+						<input type="number" name="Date_Of_Birth" value="'.esc_attr($Date_Of_Birth).'" placeholder="Inter '.esc_attr($Date_Of_Birth).'">
 						';
 					}
 
@@ -2768,7 +2768,7 @@ function educare_all_view($students = null, $on_load = null) {
 				<select id='select_time' name="time">
 					<option value='id' <?php if ($time == 'id') echo 'selected';?>>Time</option>
 					<option value='Name' <?php if ($time == 'Name') echo 'selected';?>>Name</option>
-					<option value='Roll_No' <?php if ($time == 'Roll_No') echo 'selected';?>>Roll No</option>
+					<option value='Date_Of_Birth' <?php if ($time == 'Date_Of_Birth') echo 'selected';?>>Date Of Birth</option>
 					<option value='Regi_No' <?php if ($time == 'Regi_No') echo 'selected';?>>Regi No</option>
 				</select>
 				
@@ -2888,7 +2888,7 @@ function educare_all_view($students = null, $on_load = null) {
 		?>
 			
 			<div class="wrap-input">
-				<span class="input-for">Filter <?php echo esc_html( ucfirst($msgs) );?> For Specific <i>Students, Roll No, Regi No...</i></span>
+				<span class="input-for">Filter <?php echo esc_html( ucfirst($msgs) );?> For Specific <i>Students, Date Of Birth, Regi No...</i></span>
 				<label for="searchBox" class="labels"></label>
 				<input type="search" id="searchBox" placeholder="Search <?php echo esc_attr( ucfirst($msgs) );?>" class="fields">
 				<span class="focus-input"></span>
@@ -3381,7 +3381,7 @@ function educare_demo($demo_key = null) {
 	$files_name = EDUCARE_DIR.$download_files;
 
 	if ($search) {
-		$Name = $Roll_No = $Regi_No = '';
+		$Name = $Date_Of_Birth = $Regi_No = '';
 		$Class = $selected_class;
 		$GPA = rand(2, 5);
 		$Extra_field = educare_demo_data('Extra_field');
@@ -3459,7 +3459,7 @@ function educare_demo($demo_key = null) {
 				if ($field_name == 'Name') {
 					$data[$field_name] = 'Student name' . $i;
 				}
-				if ($field_name == 'Roll_No') {
+				if ($field_name == 'Date_Of_Birth') {
 					$data[$field_name] = rand(10000, 90000);
 				}
 				if ($field_name == 'Regi_No') {
@@ -4338,7 +4338,7 @@ function educare_settings_status($target, $title, $comments, $input = null) {
 
 					<script>
 						$(document).ready(function(){
-							$("input[name='Roll_No']").click(function() {
+							$("input[name='Date_Of_Birth']").click(function() {
 								// alert($(this).val());
 								if ($(this).val() == 'checked') {
 									$('#Regi_No_no').attr("disabled",false);
@@ -4353,12 +4353,12 @@ function educare_settings_status($target, $title, $comments, $input = null) {
 							$("input[name='Regi_No']").click(function() {
 								// alert($(this).val());
 								if ($(this).val() == 'checked') {
-									$('#Roll_No_no').attr("disabled",false);
+									$('#Date_Of_Birth_no').attr("disabled",false);
 									// alert('checked!');
 								}
 								else {
-									// $('#Roll_No_no').attr("disabled",true);
-									$("input[name='Roll_No']").prop("checked", true);
+									// $('#Date_Of_Birth_no').attr("disabled",true);
+									$("input[name='Date_Of_Birth']").prop("checked", true);
 								}
 							});
 						});
@@ -5774,14 +5774,14 @@ function educare_get_students_list($Class = null, $Year = null) {
 				echo '<b>Year</b>, ';
 			}
 			
-			echo 'Please fill all required (<i>Name, Roll No, Regi No, Class, Exam</i>) fields carefully. thanks.</p><button class="notice-dismiss"></button></div>';
+			echo 'Please fill all required (<i>Name, Date Of Birth, Regi No, Class, Exam</i>) fields carefully. thanks.</p><button class="notice-dismiss"></button></div>';
 		} else {
 			$search = $wpdb->get_results("SELECT * FROM ".$educare_students." WHERE Class='$Class' AND Year='$Year'");
 
 			if (count($search) > 0) {
 				?>
 				<div class="wrap-input">
-					<span class="input-for">Filter students for specific <i>Name, Roll No, Marks...</i></span>
+					<span class="input-for">Filter students for specific <i>Name, Date Of Birth, Marks...</i></span>
 					<label for="searchBox" class="labels"></label>
 					<input type="search" id="searchBox" placeholder="Search Results" class="fields">
 					<span class="focus-input"></span>
@@ -5804,7 +5804,7 @@ function educare_get_students_list($Class = null, $Year = null) {
 									<th>No</th>
 									<th>Photos</th>
 									<th>Name</th>
-									<th>Roll No</th>
+									<th>Date Of Birth</th>
 									<th>Regi No</th>
 									<th>Marks</th>
 								</tr>
@@ -5817,7 +5817,7 @@ function educare_get_students_list($Class = null, $Year = null) {
 							foreach($search as $print) {
 								$id = $print->id;
 								$name = $print->Name;
-								$roll_no = $print->Roll_No;
+								$Date_Of_Birth = $print->Date_Of_Birth;
 								$regi_no = $print->Regi_No;
 								$Details = json_decode($print->Details);
 								$sub = json_decode($print->Subject);
@@ -5836,7 +5836,7 @@ function educare_get_students_list($Class = null, $Year = null) {
 											<td>'.esc_html( $count++ ).'</td>
 											<td><img src="'.esc_url($Details->Photos).'" class="student-img" alt="IMG"/></td>
 											<td>'.esc_html( $name ).'</td>
-											<td>'.esc_html( $roll_no ).'</td>
+											<td>'.esc_html( $Date_Of_Birth ).'</td>
 											<td>'.esc_html( $regi_no ).'</td>
 											<td width="80px"><input type="number" name="marks[]" value="'.esc_attr( educare_get_marks_by_id($id) ).'" placeholder="'.esc_attr( educare_get_marks_by_id($id) ).'" class="full"></td>
 										</tr>
@@ -5955,7 +5955,7 @@ function educare_show_student_profiles() {
 		if ($students) {
 			foreach ($students as $students) {
 				$Name = $students->Name;
-				$Roll_No = $students->Roll_No;
+				$Date_Of_Birth = $students->Date_Of_Birth;
 				$Regi_No = $students->Regi_No;
 				$Class = $students->Class;
 				$Group = $students->Group;
@@ -5995,7 +5995,7 @@ function educare_show_student_profiles() {
 
 						<div class="deatails">
 							<li><b>Name</b> <span>'.esc_html( $Name ).'</span></li>
-							<li><b>Roll No</b> <span>'.esc_html( $Roll_No ).'</span></li>
+							<li><b>Date Of Birth</b> <span>'.esc_html( $Date_Of_Birth ).'</span></li>
 							<li><b>Reg No</b> <span>'.esc_html( $Regi_No ).'</span></li>
 							<li><b>Class</b> <span>'.esc_html( $Class ).'</span></li>
 							<li><b>Group</b> <span>'.esc_html( $Group ).'</span></li>
@@ -6140,7 +6140,7 @@ function educare_show_student_profiles() {
 										<tr>
 											<th>No</th>
 											<th>Class</th>
-											<th>Roll No</th>
+											<th>Date Of Birth</th>
 											<th>Regi No</th>
 											<th>Year</th>
 										</tr>
@@ -6168,7 +6168,7 @@ function educare_show_student_profiles() {
 												$old_id = $old_data->id;
 												$old_class = $old_data->Class;
 												$old_year = $old_data->Year;
-												$old_Roll_No = $old_data->Roll_No;
+												$old_Date_Of_Birth = $old_data->Date_Of_Birth;
 												$old_Regi_No = $old_data->Regi_No;
 												$url = admin_url() . 'admin.php?page=educare-all-students&profiles=' . $old_id;
 												
@@ -6176,7 +6176,7 @@ function educare_show_student_profiles() {
 													$old_class = '<a href="'.esc_url($url).'">'.esc_html($old_class).'</a>';
 												}
 
-												echo '<tr?><td>'.esc_html($no++).'</td><td>'.wp_kses_post($old_class).'</td><td class="center">'.esc_html($old_Roll_No).'</td><td class="center">'.esc_html($old_Regi_No).'</td><td class="center">'.esc_html($old_year).'</td></tr>';
+												echo '<tr?><td>'.esc_html($no++).'</td><td>'.wp_kses_post($old_class).'</td><td class="center">'.esc_html($old_Date_Of_Birth).'</td><td class="center">'.esc_html($old_Regi_No).'</td><td class="center">'.esc_html($old_year).'</td></tr>';
 											}
 										} else {
 											echo '<tr><td colspan="5">No more data</td></tr>';
@@ -6289,7 +6289,7 @@ function educare_save_marks($publish = null) {
 				foreach ($students as $print) {
 					if ($print->id == $key ) {
 						// $results_id = $print->id;
-						$Roll_No = $print->Roll_No;
+						$Date_Of_Birth = $print->Date_Of_Birth;
 						$Regi_No = $print->Regi_No;
 
 						// remove id
@@ -6305,7 +6305,7 @@ function educare_save_marks($publish = null) {
 						$print = json_encode($print);
 						$print = json_decode( $print, TRUE );
 
-						$search_results = $wpdb->get_results("SELECT * FROM ".$educare_results." WHERE Roll_NO='$Roll_No' AND Regi_No='$Regi_No' AND Class='$Class' AND Exam='$Exam' AND Year='$Year'");
+						$search_results = $wpdb->get_results("SELECT * FROM ".$educare_results." WHERE Date_Of_Birth='$Date_Of_Birth' AND Regi_No='$Regi_No' AND Class='$Class' AND Exam='$Exam' AND Year='$Year'");
 
 						$coun++;
 
@@ -6990,9 +6990,9 @@ function educare_promote_students() {
 				foreach ($students as $print) {
 					$id = $print->id;
 					$Student_ID = $print->Student_ID;
-					$Roll_No = $print->Roll_No;
+					$Date_Of_Birth = $print->Date_Of_Birth;
 					$Regi_No = $print->Regi_No;
-					$_POST['Promoted_Roll_No'] = $Roll_No;
+					$_POST['Promoted_Date_Of_Birth'] = $Date_Of_Birth;
 					$_POST['Promoted_Regi_No'] = $Regi_No;
 
 					foreach ($requred as $key => $value) {
@@ -7010,7 +7010,7 @@ function educare_promote_students() {
 						if ($Exam) {
 							$requred_fields['Exam'] = $Exam;
 							$find_results = array (
-								'Roll_No' => $Roll_No,
+								'Date_Of_Birth' => $Date_Of_Birth,
 								'Regi_No' => $Regi_No,
 								'Class' => $Class,
 								'Exam' => $Exam,

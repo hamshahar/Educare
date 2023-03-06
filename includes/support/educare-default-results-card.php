@@ -89,9 +89,9 @@ function educare_default_results($print) {
 			<table class="result_details">';
 			
 				echo '<tr>';
-				if (key_exists('Roll_No', $requred_data) and key_exists('Regi_No', $requred_data)) {
-					echo '<td>'.esc_html( $requred_title['Roll_No'] ).'</td>
-						<td>'.esc_html($print->Roll_No).'</td>';
+				if (key_exists('Date_Of_Birth', $requred_data) and key_exists('Regi_No', $requred_data)) {
+					echo '<td>'.esc_html( $requred_title['Date_Of_Birth'] ).'</td>
+						<td>'.esc_html($print->Date_Of_Birth).'</td>';
 
 						if (key_exists('Name', $requred_data)) {
 						echo '<td>'.esc_html( $requred_title['Name'] ).'</td>
@@ -111,9 +111,9 @@ function educare_default_results($print) {
 					</tr>';
 				} else {
 					echo '</tr>';
-					if (key_exists('Roll_No', $requred_data)) {
-						echo '<td>'.esc_html( $requred_title['Roll_No'] ).'</td>
-							<td>'.esc_html($print->Roll_No).'</td>';
+					if (key_exists('Date_Of_Birth', $requred_data)) {
+						echo '<td>'.esc_html( $requred_title['Date_Of_Birth'] ).'</td>
+							<td>'.esc_html($print->Date_Of_Birth).'</td>';
 					}
 
 					if (key_exists('Regi_No', $requred_data)) {

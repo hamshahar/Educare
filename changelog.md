@@ -36,7 +36,7 @@
 - Added more options in settings
 - Admin can hide student details from result card
 - Admin can hide grade sheet from result card
-- Fixed front-end roll no and regi no short fields
+- Fixed front-end date of birth and regi no short fields
 
 ## [1.2.9] =
 
@@ -120,7 +120,7 @@
 
 - Added result rules feature
 - Now admin can add or change his own grading system
-- Reg no and roll no name are changeable
+- Reg no and Date Of Birth name are changeable
 - and only one/both can be mandatory
 - Admin can add subject according to class
 - Removed unwanted code

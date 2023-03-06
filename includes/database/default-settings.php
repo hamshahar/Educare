@@ -36,7 +36,7 @@ function educare_add_default_settings($list, $show_data = null, $new_data = null
 			'secret_key' => '',
 			'display' => [
 				'Name' => ['Name', 'checked'],
-				'Roll_No' => ['Roll No', 'checked'],
+				'Date_Of_Birth' => ['Date Of Birth', 'checked'],
 				'Regi_No' => ['Regi No', 'checked'],
 				'Class' => ['Class', 'checked'],
 				'Exam' => ['Exam', 'checked'],
