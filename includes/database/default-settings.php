@@ -5,7 +5,7 @@
  * @since 1.0.0
  * @last-update 1.4.0
  *
- * @param mixed $list			For Settings, Class, Group, Exam, Year, Extra_field
+ * @param mixed $list			For Settings, Course, Group, Exam, Year, Extra_field
  * @return void
  */
 
@@ -38,7 +38,7 @@ function educare_add_default_settings($list, $show_data = null, $new_data = null
 				'Name' => ['Name', 'checked'],
 				'Date_Of_Birth' => ['Date Of Birth', 'checked'],
 				'Regi_No' => ['Regi No', 'checked'],
-				'Class' => ['Class', 'checked'],
+				'Course' => ['Course', 'checked'],
 				'Exam' => ['Exam', 'checked'],
 				'Year' => ['Year', 'checked']
 			],
@@ -63,13 +63,13 @@ function educare_add_default_settings($list, $show_data = null, $new_data = null
 				'package' => 'free'
 			]
 		);
-	} elseif ($list == 'Class') {
-		// Default setting for class
+	} elseif ($list == 'Course') {
+		// Default setting for Course
 		$subject = array('English', 'Mathematics', 'ICT');
 		$target = array(
-			'Class 6' => $subject,
-			'Class 7' => [],
-			'Class 8' => []
+			'Course 6' => $subject,
+			'Course 7' => [],
+			'Course 8' => []
 		);
 	} elseif ($list == 'Group') {
 		// Default setting for group
@@ -139,7 +139,7 @@ function educare_add_default_settings($list, $show_data = null, $new_data = null
 // create function for store default settings/all in one
 function educare_default_settings() {
 	educare_add_default_settings('Settings');
-	educare_add_default_settings('Class');
+	educare_add_default_settings('Course');
 	educare_add_default_settings('Group');
 	educare_add_default_settings('Exam');
 	educare_add_default_settings('Year');

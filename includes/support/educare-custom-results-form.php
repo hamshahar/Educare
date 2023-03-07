@@ -14,7 +14,7 @@
  * Notes: When you add or hook custom functionality for customize the results card or search forms, you need to allow/enable the 'Custom Design Permission' options in the (educare) plugin settings. Otherwise, this function will be ignored.
  *
  * You need to keep all forms [name] as default. like -
- * 1. <select name="Class">
+ * 1. <select name="Course">
  * 2. <select name="Exam">
  * 3. <select name="Year">
  * 4. <input name="Date_Of_Birth">
@@ -39,7 +39,7 @@ function educare_my_custom_results_forms() {
 			$$key = sanitize_text_field( $value );
 		}
  	} else {
-		$Date_Of_Birth = $Regi_No = $Class = $Exam = $Year = '';
+		$Date_Of_Birth = $Regi_No = $Course = $Exam = $Year = '';
 	}
 	
 	?>
@@ -52,9 +52,9 @@ function educare_my_custom_results_forms() {
 		<p>Regi No:</p>
 		<input type="number" name="Regi_No" value="<?php echo esc_attr( $Regi_No )?>" placeholder="Inter Regi No">
 		
-		<p>Class:</p>
-		<select name="Class">
-			<?php educare_get_options('Class', $Class);?>
+		<p>Course:</p>
+		<select name="Course">
+			<?php educare_get_options('Course', $Course);?>
 		</select>
 		
 		<p>Exam:</p>

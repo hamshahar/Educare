@@ -85,7 +85,7 @@ function educare_database_table($db = null) {
 		`Name` varchar(80) NOT NULL,
 		`Date_Of_Birth` varchar(80) NOT NULL,
 		`Regi_No` varchar(80) NOT NULL,
-		`Class` varchar(80) NOT NULL,
+		`Course` varchar(80) NOT NULL,
 		`Exam` varchar(80) NOT NULL,
 		`Year` varchar(80) NOT NULL,
 		`Group` varchar(80) NOT NULL,
@@ -104,7 +104,7 @@ function educare_database_table($db = null) {
 		`Name` varchar(80) NOT NULL,
 		`Date_Of_Birth` varchar(80) NOT NULL,
 		`Regi_No` varchar(80) NOT NULL,
-		`Class` varchar(80) NOT NULL,
+		`Course` varchar(80) NOT NULL,
 		`Year` varchar(80) NOT NULL,
 		`Group` varchar(80) NOT NULL,
 		`Details` longtext NOT NULL,
@@ -119,7 +119,7 @@ function educare_database_table($db = null) {
 
   $table4 = "CREATE TABLE $Educare_marks (
 		`id` mediumint(11) NOT NULL AUTO_INCREMENT,
-		`Class` varchar(80) NOT NULL,
+		`Course` varchar(80) NOT NULL,
 		`Exam` varchar(80) NOT NULL,
 		`Year` varchar(80) NOT NULL,
 		`Marks` longtext NOT NULL,

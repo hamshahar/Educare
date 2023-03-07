@@ -106,8 +106,8 @@ function educare_default_results($print) {
 					echo '<tr>
 						<td>'.esc_html( $requred_title['Regi_No'] ).'</td>
 						<td>'.esc_html($print->Regi_No).'</td>
-						<td>'.esc_html( $requred_title['Class'] ).'</td>
-						<td>'.esc_html($print->Class).'</td>
+						<td>'.esc_html( $requred_title['Course'] ).'</td>
+						<td>'.esc_html($print->Course).'</td>
 					</tr>';
 				} else {
 					echo '</tr>';

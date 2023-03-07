@@ -129,7 +129,7 @@ function educare_check_status($target = null, $display = null) {
  * @since 1.2.0
  * @last-update 1.2.4
  * 
- * @param string $list					Class, Group, Setting, Exam, Year, Extra_field
+ * @param string $list					Course, Group, Setting, Exam, Year, Extra_field
  * @param string $target				for specific data
  * 
  * @return array|bool
@@ -245,7 +245,7 @@ function educare_database_error_notice($fix_form = null, $db = null) {
  * @since 1.0.0
  * @last-update 1.0.0
  * 
- * @param string $list				Specific keys value: Subject/Class/Exam/Year/Extra Field...
+ * @param string $list				Specific keys value: Subject/Course/Exam/Year/Extra Field...
  * @param string $content			Specific keys value
  * @param string|int $year		Specific keys value
  * 
@@ -288,7 +288,7 @@ function educare_guide_for($guide, $details = null, $success = true) {
 		$url = '/wp-admin/admin.php?page=educare-management&';
 
 		if ($guide == 'add_class') {
-			$guide = "Do you want to add more <b>Class</b>, <b>Exam</b> or <b>Year</b>? click here to add <a href='".esc_url($url . 'Class')."' target='_blank'>Class</a>, <a href='".esc_url($url . 'Exam')."' target='_blank'>Exam</a> or <a href='".esc_url($url . 'Year')."' target='_blank'>Year</a>";
+			$guide = "Do you want to add more <b>Class</b>, <b>Exam</b> or <b>Year</b>? click here to add <a href='".esc_url($url . 'Course')."' target='_blank'>Course</a>, <a href='".esc_url($url . 'Exam')."' target='_blank'>Exam</a> or <a href='".esc_url($url . 'Year')."' target='_blank'>Year</a>";
 		}
 		
 		if ($guide == 'add_extra_field') {
@@ -419,13 +419,13 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 		
 		foreach ( $results as $print ) {
 			$results = $print->data;
-			// $subject = ["Class", "Regi_No", "Date_Of_Birth", "Exam", "Name"];
+			// $subject = ["Course", "Regi_No", "Date_Of_Birth", "Exam", "Name"];
 
-			if ($list == 'Class' or $list == 'Group') {
+			if ($list == 'Course' or $list == 'Group') {
 				$results = json_decode($results, true);
 				$cls = array();
-				foreach ( $results as $class => $sub ) {
-					$cls[] = $class;
+				foreach ( $results as $Course => $sub ) {
+					$cls[] = $Course;
 				}
 				$results = json_encode($cls);
 			}
@@ -444,8 +444,8 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 					}
 				}
 
-				if (key_exists($selected_class, $results)) {
-					$results = $results[$selected_class];
+				if (key_exists($selected_Course, $results)) {
+					$results = $results[$selected_Course];
 				}
 				
 				if (key_exists('select_subject', $_POST)) {
@@ -482,8 +482,8 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 				$cls = array();
 
 				if ($results) {
-					foreach ( $results as $class) {
-						$cls[] = $class;
+					foreach ( $results as $Course) {
+						$cls[] = $Course;
 					}
 				}
 
@@ -616,7 +616,7 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 				
 			}
 			
-			if ($list == 'Class' or $list == 'Group' or $list == 'Exam' or $list == 'Year') {
+			if ($list == 'Course' or $list == 'Group' or $list == 'Exam' or $list == 'Year') {
 				$selected = '';
 				$check = "";
 				if ($id == $display) {
@@ -646,9 +646,9 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 
 
 /**
- * ### Get specific class subject
+ * ### Get specific Course subject
  * 
- * Usage example: educare_get_options_for_subject('Class 6', $Subject);
+ * Usage example: educare_get_options_for_subject('Course 6', $Subject);
  * it's only return <option>...</option>. soo, when calling this function you have must add <select>...</select> (parent) tags before and after.
  * Example:
  * 
@@ -659,7 +659,7 @@ function educare_get_options($list, $id, $selected_class = null, $add_students =
 
  * @since 1.2.4
  * @last-update 1.2.4
- * @param string $class				For specific class wise subject
+ * @param string $Course				For specific Course wise subject
  * @param string $value				Specific variable to make fields selected
  * 
  * @return string|html
@@ -701,7 +701,7 @@ function educare_get_options_for_subject($data_for, $target, $value = null) {
  * 
  * @param string $target				for specific data
  * @param string $current				selected data
- * @param string $option_for		option for Class or Group
+ * @param string $option_for		option for Course or Group
  * 
  * @return mixed
  */
@@ -742,20 +742,20 @@ function educare_show_options($target, $current = null, $option_for = 'Class') {
 
 
 /**
- * ### Display specific class subject
+ * ### Display specific Course subject
  * 
- * Usage example: educare_get_subject('class name', $id);
+ * Usage example: educare_get_subject('Course name', $id);
  * 
  * @since 1.2.0
  * @last-update 1.2.0
  * 
- * @param string $class			Select class for get subject
+ * @param string $Course			Select Course for get subject
  * @param int $id						Select specific database rows by id
  * 
  * @return string
  */
 
-function educare_get_subject($class, $group, $id, $add_students = null) {
+function educare_get_subject($Course, $group, $id, $add_students = null) {
 
 	if (isset($_POST['Add'])) {
 		$id = 'add';
@@ -784,7 +784,7 @@ function educare_get_subject($class, $group, $id, $add_students = null) {
 		
 		<tbody>
 			<?php 
-			educare_get_options('Subject', $id, $class, $add_students);
+			educare_get_options('Subject', $id, $Course, $add_students);
 			?>
 
 			<tbody id="Group_list"></tbody>
@@ -1104,7 +1104,7 @@ $array = array(
   'Date_Of_Birth' => 1,
   'Regi_No' => 2,
   'Year' => 2022,
-  'Class' => 'Class 6',
+  'Course' => 'Course 6',
   'Exam' => ''
 );
  */
@@ -1386,12 +1386,12 @@ function educare_crud_data($add_students = null, $import_data = null) {
     // create and show msgs
     if ($msgs == 'added' or $msgs == 'updated') {
       echo "<div class='notice notice-success is-dismissible'><p>";
-        echo "Successfully ".esc_html($msgs)." ".esc_html($msg)."." . wp_kses_post($name . $class . $Date_Of_Birth . $regi_no) . $forms;
+        echo "Successfully ".esc_html($msgs)." ".esc_html($msg)."." . wp_kses_post($name . $Course . $Date_Of_Birth . $regi_no) . $forms;
       echo "</p></div>";
     }
     
     if ($msgs == 'exist') {
-      echo "<div class='notice notice-error is-dismissible'><p>Sorry, ".esc_html($msg)." is allready exist." . wp_kses_post($name . $class) . $forms;
+      echo "<div class='notice notice-error is-dismissible'><p>Sorry, ".esc_html($msg)." is allready exist." . wp_kses_post($name . $Course) . $forms;
       echo "</p></div>";
     }
     
@@ -1570,7 +1570,7 @@ function educare_crud_data($add_students = null, $import_data = null) {
  * 
  * Usage example: educare_get_results_forms($print, 'add/update')
  * 
- * it's only print forms field (Name, Class, Exam, Date Of Birth, Regi No, Year...)
+ * it's only print forms field (Name, Course, Exam, Date Of Birth, Regi No, Year...)
  * required educare_crud_data() function for work properly
  * Actually, this function only for print forms under educare_crud_data();
  * 
@@ -1633,7 +1633,7 @@ function educare_get_results_forms($print, $add_students = null) {
 				<h2>Students Details</h2>
 					
 				<div class="select">
-					<label for="Class" class="labels" id="class"></label>
+					<label for="Course" class="labels" id="Course"></label>
 					<label for="Exam" class="labels" id="exam"></label>
 				</div>
 				
@@ -1664,8 +1664,8 @@ function educare_get_results_forms($print, $add_students = null) {
 				<?php echo educare_guide_for('add_class');?>
 
 				<div class="select">
-					<select id="Class" name="Class" class="form-control">
-						<?php educare_get_options('Class', $Class);?>
+					<select id="Course" name="Course" class="form-control">
+						<?php educare_get_options('Course', $Course);?>
 					</select>
 				
 				<?php 
@@ -1690,7 +1690,7 @@ function educare_get_results_forms($print, $add_students = null) {
 				}
 
 				if (!$add_students) {
-					echo '<div id="data_from_students" title="Get data/details from specific student profiles. For this, you need to fill date of birth, regi no, class and year."><div class="educare_button">Auto Fill</div></div>';
+					echo '<div id="data_from_students" title="Get data/details from specific student profiles. For this, you need to fill date of birth, regi no, Course and year."><div class="educare_button">Auto Fill</div></div>';
 				}
 				
 				?>
@@ -1752,13 +1752,13 @@ function educare_get_results_forms($print, $add_students = null) {
 
 				<?php echo educare_guide_for('add_subject');?>
 				<div id="result_msg">
-					<?php educare_get_subject($Class, $Group, $id, $add_students) ?>
+					<?php educare_get_subject($Course, $Group, $id, $add_students) ?>
 				</div>
 
 				<br>
 				<?php
 				// if ($submit != 'Add') { 
-				// 	echo educare_guide_for('If you want to update old class data ('.esc_html($requred_title['Name']).', '.esc_html($requred_title['Date_Of_Birth']).', '.esc_html($requred_title['Regi_No']).', Details) please check it otherwise uncheck.');
+				// 	echo educare_guide_for('If you want to update old Course data ('.esc_html($requred_title['Name']).', '.esc_html($requred_title['Date_Of_Birth']).', '.esc_html($requred_title['Regi_No']).', Details) please check it otherwise uncheck.');
 
 				// 	echo '<input type="checkbox" name="update_old_data" checked> Update old data <br>';
 				// }
@@ -1800,13 +1800,13 @@ function educare_get_data_from_students() {
 
 	$roll = sanitize_text_field($_POST['Date_Of_Birth']);
 	$regi = sanitize_text_field($_POST['Regi_No']);
-	$class = sanitize_text_field($_POST['Class']);
+	$Course = sanitize_text_field($_POST['Course']);
 	$year = sanitize_text_field($_POST['Year']);
 
 	$_POST = array (
 		'Date_Of_Birth' => $roll,
 		'Regi_No' => $regi,
-		'Class' => $class,
+		'Course' => $Course,
 		'Year' => $year,
 	);
 
@@ -1828,7 +1828,7 @@ add_action('wp_ajax_educare_get_data_from_students', 'educare_get_data_from_stud
  * ### Display forms for search students results
  * 
  * Search specific results for Edit/Delete/View
- * Search results by Class, Exam, Year, Roll & Regi No for Edit/Delete/View specific results.
+ * Search results by Course, Exam, Year, Roll & Regi No for Edit/Delete/View specific results.
  * Admin can Edit/Delete/View the results.
  * Users only view the results.
  * 
@@ -1857,12 +1857,12 @@ function educare_get_search_forms($front = null) {
 				<div class="content">
 					<?php
 					echo '<div class="select add-subject">';
-						if (key_exists('Class', $requred_fields)) {
+						if (key_exists('Course', $requred_fields)) {
 							?>
 							<div>
-								<p><?php echo esc_html($class);?>:</p>
-								<select id="Class" name="Class" class="fields">
-									<?php educare_get_options('Class', $Class);?>
+								<p><?php echo esc_html($Course);?>:</p>
+								<select id="Course" name="Course" class="fields">
+									<?php educare_get_options('Course', $Course);?>
 								</select>
 							</div>
 							<?php
@@ -2073,7 +2073,7 @@ function educare_tab_management($action_for = 'management', array $tab = null) {
 	if (!$tab) {
 		$tab = array (
 			// tab name => icon
-			'Class' => 'awards',
+			'Course' => 'awards',
 			'Group' => 'groups',
 			'Exam' => 'welcome-write-blog',
 			'Year' => 'calendar',
@@ -2128,8 +2128,8 @@ function educare_tab_management($action_for = 'management', array $tab = null) {
 		<?php
 		if ($action_for == 'management') {
 			?>
-			// Function for Class and Group
-			$(document).on("click", ".proccess_Class, .proccess_Group", function(event) {
+			// Function for Course and Group
+			$(document).on("click", ".proccess_Course, .proccess_Group", function(event) {
 
 				event.preventDefault();
 				var current = $(this);
@@ -2333,7 +2333,7 @@ function educare_get_tab_management($action_for) {
 			echo educare_guide_for("Using this features admin (teacher) can add subject wise multiple students results at a same time. So, it's most usefull for (single) teacher. There are different teachers for each subject. Teachers can add marks for their specific subject using this feature. And can print all student marks as a marksheet. After, the mark addition is done for all the subjects, students can view and print their results when admin publish it as results. Also, teacher can publish single subject results. (We call it - <b>THE GOLDEN FEATURES FOR TEACHER!</b>)");
 			
 			if (isset($_POST['students_list'])) {
-				$Class = sanitize_text_field($_POST['Class']);
+				$Course = sanitize_text_field($_POST['Course']);
 				$Group = sanitize_text_field($_POST['Group']);
 				$Exam = sanitize_text_field($_POST['Exam']);
 				$Subject = sanitize_text_field($_POST['Subject']);
@@ -2344,9 +2344,9 @@ function educare_get_tab_management($action_for) {
 			<form method='post' action="" class="add_results">
 				<div class="content">
 				<div class="select">
-						<select id="Class" name="Class" class="form-control">
-						<option value="">Select Class</option>
-							<?php educare_get_options('Class', $Class);?>
+						<select id="Course" name="Class" class="form-control">
+						<option value="">Select Course</option>
+							<?php educare_get_options('Course', $Course);?>
 						</select>
 
 						<select id="Group" name="Group" class="form-control">
@@ -2386,7 +2386,7 @@ function educare_get_tab_management($action_for) {
 			<div id="msgs"></div>
 
 			<script type="text/javascript">
-				$(document).on("change", "#Class, #Group", function(event) {
+				$(document).on("change", "#Course, #Group", function(event) {
 					event.preventDefault();
 					var current = $(this);
 					var form_data = $(this).parents('form').serialize();
@@ -2497,7 +2497,7 @@ function educare_get_tab_management($action_for) {
 			echo '<div class="cover"><img src="'.esc_url(EDUCARE_URL.'assets/img/achivement.svg').'" alt="Achivement" title="Achivement"/></div>';
 			echo "<h1>Promote</h1>";
 
-			echo educare_guide_for('Here you can change multiple students class, year, group just one click! Most usefull when you need to promote students (one class to onother) or need to update mulltiple studens');
+			echo educare_guide_for('Here you can change multiple students Course, year, group just one click! Most usefull when you need to promote students (one class to onother) or need to update mulltiple studens');
 			
 			echo '<div id="promote_msgs">';
 			educare_promote_students();
@@ -3317,7 +3317,7 @@ function educare_replace_key($array, $old_key, $new_key) {
  */
 
 function educare_class() {
-	$class = sanitize_text_field($_POST['class']);
+	$class = sanitize_text_field($_POST['Course']);
 	$add_students = sanitize_text_field($_POST['add_students']);
 	
 	$id = sanitize_text_field($_POST['id']);
@@ -3414,7 +3414,7 @@ function educare_demo($demo_key = null) {
 				$data[$value] = rand(10000000, 90000000);
 			}
 			elseif ($type == 'date') {
-				$data[$value] = date("Y-m-d");
+				$data[$value] = date("d-m-y");
 			}
 			elseif ($type == 'email') {
 				$data[$value] = 'youremail@gmail.com';
@@ -3692,7 +3692,7 @@ function educare_import_result($data_for = null) {
 			<p>Files must be an <b>.csv</b> extension for import the results.</p>
 			<input type="hidden" name="<?php echo esc_attr( $data_for );?>" value="<?php echo esc_attr( $data_for );?>">
 			<input type="file" name="import_file">
-			<select name="Class" class="form-control">
+			<select name="Course" class="form-control">
 				<?php educare_get_options('Class', '');?>
 			</select><br>
 			<button class="educare_button" type="submit" name="educare_import_data"><i class="dashicons dashicons-database-import"></i> Import</button>
@@ -3799,7 +3799,7 @@ function educare_ai_fix() {
  * 
  * Usage example: educare_settings('Settings');
  * 
- * Add / Update / Remove - Subject, Exam, Class, Year, Extra field... and settings status.
+ * Add / Update / Remove - Subject, Exam, Course, Year, Extra field... and settings status.
  * 
  * this is a main function for update all above (Settings) content. it's decide which content need to Add / Update / Remove and where to store Data into database.
  *
@@ -4897,14 +4897,14 @@ function educare_process_class($list) {
 		echo educare_guide_for('db_error', '', false);
 	}
 
-	// Add newly adde class or group in options without realoding the page
+	// Add newly adde Course or group in options without realoding the page
 
-	if (isset($_POST['educare_process_Class']) or isset($_POST['educare_process_Group'])) {
+	if (isset($_POST['educare_process_Course']) or isset($_POST['educare_process_Group'])) {
 		$data_for = 'Group';
-		$class = sanitize_text_field( $_POST['class'] );
+		$class = sanitize_text_field( $_POST['Course'] );
 
-		if (isset($_POST['educare_process_Class'])) {
-			$data_for = 'Class';
+		if (isset($_POST['educare_process_Course'])) {
+			$data_for = 'Course';
 		}
 		
 		?>
@@ -4918,7 +4918,7 @@ function educare_process_class($list) {
 
 
 /** 
- * ### Educare manage class and group
+ * ### Educare manage Course and group
  * 
  * @since 1.4.0
  * @last-update 1.4.0
@@ -5296,7 +5296,7 @@ function educare_content($list, $form = null) {
  * @since 1.4.0
  * @last-update 1.4.0
  * 
- * @param string $list		for specific data - Class or Group
+ * @param string $list		for specific data - Course or Group
  * @return mixed
  */
 
@@ -5325,7 +5325,7 @@ function educare_get_all_content($list) {
  * @since 1.4.0
  * @last-update 1.4.0
  * 
- * @param string $list		for specific data - Class or Group
+ * @param string $list		for specific data - Course or Group
  * @return mixed
  */
 
@@ -5493,9 +5493,9 @@ function educare_process_content() {
 	$_POST[$action_for] = $action_for;
 	$_POST['active_menu'] = $active_menu;
 
-	if (isset($_POST['educare_process_Class'])) {
-		educare_process_class('Class');
-		educare_setting_subject('Class');
+	if (isset($_POST['educare_process_Course'])) {
+		educare_process_class('Course');
+		educare_setting_subject('Course');
 	}
 	elseif (isset($_POST['educare_process_Group'])) {
 		educare_process_class('Group');
@@ -5957,7 +5957,7 @@ function educare_show_student_profiles() {
 				$Name = $students->Name;
 				$Date_Of_Birth = $students->Date_Of_Birth;
 				$Regi_No = $students->Regi_No;
-				$Class = $students->Class;
+				$Course = $students->Course;
 				$Group = $students->Group;
 				$Year = $students->Year;
 				$Details = $students->Details;
@@ -5997,7 +5997,7 @@ function educare_show_student_profiles() {
 							<li><b>Name</b> <span>'.esc_html( $Name ).'</span></li>
 							<li><b>Date Of Birth</b> <span>'.esc_html( $Date_Of_Birth ).'</span></li>
 							<li><b>Reg No</b> <span>'.esc_html( $Regi_No ).'</span></li>
-							<li><b>Class</b> <span>'.esc_html( $Class ).'</span></li>
+							<li><b>Course</b> <span>'.esc_html( $Course ).'</span></li>
 							<li><b>Group</b> <span>'.esc_html( $Group ).'</span></li>
 							<li><b>Birthday</b> <span>'.esc_html( $DoB ).'</span></li>
 							<li><b>Mobile</b> <span>'.esc_html( $Mobile ).'</span></li>
@@ -6415,14 +6415,14 @@ function educare_process_marks() {
 	$_POST[$action_for] = $action_for;
 	$_POST['data_for'] = $data_for;
 
-	$Class = sanitize_text_field($_POST['Class']);
+	$Course = sanitize_text_field($_POST['Course']);
 	$Group = sanitize_text_field($_POST['Group']);
 	$Subject = sanitize_text_field($_POST['Subject']);
 	$Exam = sanitize_text_field($_POST['Exam']);
 	$Year = sanitize_text_field($_POST['Year']);
 
-	if (isset($_POST['get_Class'])) {
-		educare_get_options_for_subject('Class', $Class, $Subject);
+	if (isset($_POST['get_Course'])) {
+		educare_get_options_for_subject('Course', $Course, $Subject);
 	} elseif (isset($_POST['get_Group'])) {
 		educare_get_options_for_subject('Group', $Group, $Subject);
 	} elseif (isset($_POST['publish_marks'])) {
@@ -6441,7 +6441,7 @@ add_action('wp_ajax_educare_process_marks', 'educare_process_marks');
 
 
 /** 
- * ### Ajax responce when request for class or group options
+ * ### Ajax responce when request for Course or group options
  * 
  * @since 1.4.0
  * @last-update 1.4.0
@@ -6484,7 +6484,7 @@ add_action('wp_ajax_educare_process_options_by', 'educare_process_options_by');
  * 
  * @see educare_get_data_management()
  * 
- * @param string $target				for specific data - Class or Group
+ * @param string $target				for specific data - Course or Group
  * @param bool $add_students		if data for results or students
  * @return mixed
  */
@@ -6496,7 +6496,7 @@ function educare_options_by_ajax($target, $add_students = null) {
 		var connectionsError = '<div class="notice notice-error is-dismissible"><p>Sorry, (database) connections error!</p></div>';
 		
 		function changeClass(currentData) {
-			var class_name = $('#Class').val();
+			var Course_name = $('#Course').val();
 			var id_no = $('#id_no').val();
 			var form_data = $(currentData).parents('form').serialize();
 
@@ -6504,7 +6504,7 @@ function educare_options_by_ajax($target, $add_students = null) {
 				url: "<?php echo esc_url(admin_url('admin-ajax.php'))?>",
 				data: {
 					action: 'educare_class',
-					class: class_name,
+					class: Course_name,
 					id: id_no,
 					form_data: form_data,
 					add_students: "<?php echo esc_js($add_students)?>",
@@ -6518,7 +6518,7 @@ function educare_options_by_ajax($target, $add_students = null) {
 				success: function(data) {
 					$('#result_msg').html(data);
 					$('#Class').attr('disabled', false);
-					$('#sub_msgs').html('<div class="notice notice-error is-dismissible"><p>Please select the group. If this class has a group, then select group. otherwise ignore it.</p></div>');
+					$('#sub_msgs').html('<div class="notice notice-error is-dismissible"><p>Please select the group. If this Course has a group, then select group. otherwise ignore it.</p></div>');
 				},
 				error: function(data) {
 					$('#result_msg').html('<div class="notice notice-error is-dismissible"><p>Sorry, database connection error!</p></div>');
@@ -6589,7 +6589,7 @@ function educare_options_by_ajax($target, $add_students = null) {
 			}
 		}
 
-		$(document).on("change", "#crud-forms #Class", function(event) {
+		$(document).on("change", "#crud-forms #Course", function(event) {
 			event.preventDefault();
 			currentData = $(this);
 			changeClass(currentData);
@@ -6721,12 +6721,12 @@ function educare_options_by_ajax($target, $add_students = null) {
 
 
 /** 
- * ### Creat option for group or class
+ * ### Creat option for group or Course
  * 
  * @since 1.4.0
  * @last-update 1.4.0
  * 
- * @param string $target				for specific data - Class or Group
+ * @param string $target				for specific data - Course or Group
  * @param string $val						selected value
  * @return mixed
  */
@@ -6744,7 +6744,7 @@ function educare_options_by($target, $val) {
 		</select>
 
 		<?php
-		// data for class/add marks page
+		// data for Course/add marks page
 		if ($target == 'Class') {
 			echo '<select id="'.esc_attr($target).'_list" name="'.esc_attr($target).'_list" class="form-control"><option value="">Select Subject</option></select>';
 		}
@@ -6936,7 +6936,7 @@ function educare_promote_students() {
 
 	if (isset($_POST['promote'])) {
 		$requred = array (
-			'Class',
+			'Course',
 			'Year',
 		);
 		
@@ -7081,7 +7081,7 @@ function educare_promote_students() {
 								}
 							}
 
-							$sub = educare_check_settings('Class', $new_class);
+							$sub = educare_check_settings('Course', $new_Course);
 
 							if ($new_group) {
 								$sub = array_merge($sub, $new_group);
@@ -7167,8 +7167,8 @@ function educare_promote_students() {
 				<div class="select">
 					<div>
 						<div>Promote From (Old)</div>
-						<select id="Class" name="Class" class="form-control">
-							<?php educare_get_options('Class', $Class);?>
+						<select id="Course" name="Course" class="form-control">
+							<?php educare_get_options('Course', $Course);?>
 						</select>
 
 						<select id="Year" name="Year" class="fields">
@@ -7188,9 +7188,9 @@ function educare_promote_students() {
 
 					<div>
 					<div>To Selected Term (New)</div>
-						<select id="Promoted_Class" name="Promoted_Class" class="form-control">
-							<option value="">Select Class</option>
-							<?php educare_get_options('Class', $Promoted_Class);?>
+						<select id="Promoted_Course" name="Promoted_Course" class="form-control">
+							<option value="">Select Course</option>
+							<?php educare_get_options('Class', $Promoted_Course);?>
 						</select>
 
 						<select id="Promoted_Year" name="Promoted_Year" class="fields">

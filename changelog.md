@@ -91,7 +91,7 @@
 
 - Improve perfomance
 - Added Customize options in settings
-- Now admin can enable/disable all default required fields in search forms. (Roll Number, Reg Number, Class, Exam, Year)
+- Now admin can enable/disable all default required fields in search forms. (Roll Number, Reg Number, Course, Exam, Year)
 - Added more options to view results (admin can find results of his choice!)
 - Added single results delete button in view results
 - Fixed issue with Delete All Results button not working
